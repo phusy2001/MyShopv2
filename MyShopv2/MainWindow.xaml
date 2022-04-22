@@ -105,7 +105,7 @@
 
 
         <Grid Grid.Column="1" Grid.Row="1" Background="#FFFFFF">
-            <Frame Name="Main" Source="Pages/Dashboard.xaml">
+            <Frame NavigationUIVisibility="Hidden" Panel.ZIndex="1" Name="Main" Source="Pages/Dashboard.xaml">
             </Frame>
         </Grid>
 

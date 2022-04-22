@@ -6,9 +6,41 @@
       xmlns:local="clr-namespace:MyShopv2.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProductManagement">
-
+      Title="ProductManagement" Loaded="Window_Loaded">
+    <Page.Resources>
+        <CollectionViewSource x:Key="ProductViewSource"/>
+    </Page.Resources>
     <Grid>
-        <TextBlock>Product</TextBlock>
+        <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding Source={StaticResource ProductViewSource}}" 
+                             Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                            Header="User Id" Width="SizeToHeader"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Name}"
+                            Header="Product name" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Description}"
+                            Header="Description" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Price}"
+                            Header="Price" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Quantity}"
+                            Header="Quantity" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CategoryID}"
+                            Header="Category ID" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CreatedAt}"
+                            Header="Created at" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UpdatedAt}"
+                            Header="Updated at" Width="*"
+                            IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
