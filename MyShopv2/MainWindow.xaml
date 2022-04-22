@@ -105,92 +105,8 @@
 
 
         <Grid Grid.Column="1" Grid.Row="1" Background="#FFFFFF">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0">
-                        <Rectangle Height="120" Margin="20" Fill="White" RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
-                        <Grid Margin="25" Height="120">
-                            <Grid Width="35" Height="50" Background="#FFFFAF24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                                <Grid.Effect>
-                                    <DropShadowEffect BlurRadius="20" Color="#FFECECEC" RenderingBias="Quality" ShadowDepth="1"/>
-                                </Grid.Effect>
-                                <materialDesign:PackIcon Kind="ContentCopy" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                            </Grid>
-                            <TextBlock Text="Espaço Usado" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 20">
-                                <TextBlock Text="49/50" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center" Foreground="Gray" FontSize="50"/>
-                                <TextBlock Text="GB" FontFamily="Champagne &amp; Limousines" Margin="0 5" Foreground="Gray" FontSize="20" VerticalAlignment="Bottom"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" Cursor="Hand">
-                                <materialDesign:PackIcon Kind="AlertOutline" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                                <TextBlock Text="Adquirir mais espaço" FontSize="8" Foreground="#3F51B5"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Rectangle Height="120" Margin="20" Fill="White" RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
-                        <Grid Margin="25" Height="120">
-                            <Grid Width="35" Height="50" Background="#FF41A43C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                                <Grid.Effect>
-                                    <DropShadowEffect BlurRadius="20" Color="#FFECECEC" RenderingBias="Quality" ShadowDepth="1"/>
-                                </Grid.Effect>
-                                <materialDesign:PackIcon Kind="Store" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                            </Grid>
-                            <TextBlock Text="Receita" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 30">
-                                <TextBlock Text="R$" FontFamily="Champagne &amp; Limousines" Margin="0 2" Foreground="Gray" FontSize="20" VerticalAlignment="Bottom"/>
-                                <TextBlock Text="35.674,00" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center" Foreground="Gray" FontSize="30"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
-                                <materialDesign:PackIcon Kind="Calendar" Foreground="Gray" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                                <TextBlock Text="Ultimas 24h" FontSize="8" Foreground="Gray"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Rectangle Height="120" Margin="20" Fill="White" RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
-                        <Grid Margin="25" Height="120">
-                            <Grid Width="35" Height="50" Background="#FFCF1F1F" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                                <Grid.Effect>
-                                    <DropShadowEffect BlurRadius="20" Color="#FFECECEC" RenderingBias="Quality" ShadowDepth="1"/>
-                                </Grid.Effect>
-                                <materialDesign:PackIcon Kind="InformationOutline" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                            </Grid>
-                            <TextBlock Text="Erros Corrigidos" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 30">
-                                <TextBlock Text="75" FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center" Foreground="Gray" FontSize="40"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
-                                <materialDesign:PackIcon Foreground="Gray" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                                <TextBlock Text="Monitorado pelo GitHub" FontSize="8" Foreground="Gray"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </ScrollViewer>
+            <Frame Name="Main" Source="Pages/Dashboard.xaml">
+            </Frame>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -213,42 +129,35 @@
             </Grid>
 
             <StackPanel Grid.Row="1">
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
+                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5" Click="NavigateToDashboard">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="DASHBOARD" FontFamily="Champagne &amp; Limousines"/>
                     </Grid>
                 </Button>
 
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
+                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5" Click="NavigateToUser">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="USERS" FontFamily="Champagne &amp; Limousines"/>
                     </Grid>
                 </Button>
 
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
+                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5" Click="NavigateToOrder">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="ContentPaste" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="ORDERS" FontFamily="Champagne &amp; Limousines"/>
                     </Grid>
                 </Button>
 
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
-                    <Grid Width="150">
-                        <materialDesign:PackIcon Kind="Shape" VerticalAlignment="Center"/>
-                        <TextBlock HorizontalAlignment="Center" Text="CATEGORIES" FontFamily="Champagne &amp; Limousines"/>
-                    </Grid>
-                </Button>
-
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
+                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5" Click="NavigateToProduct">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="CellphonePlay" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="PRODUCTS" FontFamily="Champagne &amp; Limousines"/>
                     </Grid>
                 </Button>
 
-                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5">
+                <Button Margin="10" Background="#3F51B5" BorderBrush="#3F51B5" Click="NavigateToCoupon">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="TicketPercent" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="COUPONS" FontFamily="Champagne &amp; Limousines"/>
@@ -273,7 +182,7 @@
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
                     <materialDesign:PackIcon Kind="Account"/>
                 </Button>
-                <Button x:Name="ButtonFechar" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+                <Button x:Name="ButtonFechar" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="CloseWindow">
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
             </StackPanel>
