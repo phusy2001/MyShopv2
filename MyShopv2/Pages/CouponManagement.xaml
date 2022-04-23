@@ -54,7 +54,7 @@
   Style="{StaticResource MaterialDesignFlatMidBgButton}"
   ToolTip="MaterialDesignFlatMidButton"
   Content="Add Coupon"
-  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="addDiscountBtn_Click"/>
 
             <Button Grid.Row="1"
   Style="{StaticResource MaterialDesignFlatMidBgButton}"

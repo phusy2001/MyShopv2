@@ -42,5 +42,11 @@ namespace MyShopv2.Pages
             // bind to the source
             DiscountViewSource.Source = _context.Discounts.Local.ToObservableCollection();
         }
+
+        private void addDiscountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var addCoupon = new addDiscount();
+            addCoupon.ShowDialog();
+        }
     }
 }

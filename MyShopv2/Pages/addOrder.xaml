@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyShopv2.Pages"
         mc:Ignorable="d"
-        Title="addOrder" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="addOrder" Height="450" Width="450" Loaded="Window_Loaded">
     
     <Border Margin="10" Padding="10" CornerRadius="10" BorderThickness="1" BorderBrush="LightGray" Background="#039BE5">
         <StackPanel DockPanel.Dock="Right" Background="#039BE5">

@@ -18,16 +18,15 @@ using System.Windows.Shapes;
 namespace MyShopv2.Pages
 {
     /// <summary>
-    /// Interaction logic for addOrder.xaml
+    /// Interaction logic for addDiscount.xaml
     /// </summary>
-    public partial class addOrder : Window
+    public partial class addDiscount : Window
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
-        
-        public addOrder()
+
+        public addDiscount()
         {
             InitializeComponent();
-            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -37,42 +36,30 @@ namespace MyShopv2.Pages
             _context.Database.EnsureCreated();
 
             // load the entities into EF Core
-            _context.Orders.Load();
+            _context.Discounts.Load();
 
             // bind to the source
-            
-        }
-
-        private void addOrderClick(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void cancelClick(object sender, TextChangedEventArgs e)
-        {
 
         }
 
-        private async void addOrderBtn_ClickAsync(object sender, RoutedEventArgs e)
+        private async void addDiscountBtn_Click(object sender, RoutedEventArgs e)
         {
-            int customerID = Int32.Parse(userName.Text);
-            var orderStatus = status.Text;
-            int orderAddres = Int32.Parse(address.Text);
-            var createdAt = createdDay.Text;
-            var newOrder = new Order() //create newUser with optional data
+            var newCoupon = new Discount() //create newUser with optional data
             {
-
-                UserID = customerID,
-                Status = orderStatus,
-                ShippingAddressID = orderAddres,
-                CreatedAt = "23/04/2022",
-                UpdatedAt = "23/04/2022"
+                Name = discountName.Text,
+                CouponCode = discountCode.Text,
+                DiscountPercentage = float.Parse( discountPercent.Text),
+                StartDate = "23/04/2022",
+                EndDate = "30/04/2022",
+                LimitationTimes = Int32.Parse(limitation.Text),
+                MaximumDiscountedQuantity = Int32.Parse(quantity.Text),
             };
 
             try
             {
                 if (true) //Need handle user input
                 {
-                    await _context.Orders.AddAsync(newOrder);
+                    await _context.Discounts.AddAsync(newCoupon);
                     _context.SaveChanges();
                     //this.userDataGrid.Items.Refresh();
                 }
@@ -89,16 +76,6 @@ namespace MyShopv2.Pages
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void addOrderBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void addDiscountBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
