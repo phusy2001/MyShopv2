@@ -53,7 +53,7 @@
             </materialDesign:Card.Background>
         </materialDesign:Card>
         <!--Live Chart-->
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="371,224,111,38">
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="512,236,11,12">
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Truc tung"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
@@ -61,7 +61,7 @@
                 <lvc:Axis Title="Truc hoanh" ></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <lvc:CartesianChart Series="{Binding SeriesCollections}"  Margin="0,224,529,0">
+        <lvc:CartesianChart Series="{Binding SeriesCollections}"  Margin="0,224,579,0">
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Truc tung" LabelFormatter="{Binding LabelFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
