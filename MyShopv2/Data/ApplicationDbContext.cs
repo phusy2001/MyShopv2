@@ -13,7 +13,7 @@ namespace MyShop.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           optionsBuilder.UseSqlServer("Server=DESKTOP-EQA7TFT\\SYNGUYEN;Database=MyShop;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-EQA7TFT\\SYNGUYEN;Database=MyShop;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }

@@ -5,10 +5,103 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyShopv2.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserManagement">
-
-    <Grid>
-        <TextBlock>User</TextBlock>
-    </Grid>
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="UserManagement" Loaded="Window_Loaded">
+    <Page.Resources>
+        <CollectionViewSource x:Key="UserViewSource"/>
+    </Page.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <TextBlock Margin="13, 30, 13, 13" DockPanel.Dock="Left">Customer Name</TextBlock >
+            <TextBox
+                x:Name="SearchField"
+                Margin="13, 13, 13, 13"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="True"
+                Width="350"
+                TextWrapping="Wrap"
+                MaxWidth="400"
+                materialDesign:HintAssist.Hint="Please insert exacly name"
+                IsEnabled="{Binding Path=True, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" />
+            <Button
+                Click="BtnSearch_Click"
+                Style="{StaticResource MaterialDesignIconButton}"
+                ToolTip="MaterialDesignIconButton"
+                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <materialDesign:PackIcon Kind="Search" />
+            </Button>
+            <Button
+                DockPanel.Dock="Right"
+                Click="BtnReload_Click"
+                Style="{StaticResource MaterialDesignIconButton}"
+                ToolTip="MaterialDesignIconButton"
+                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <materialDesign:PackIcon Kind="Reload" />
+            </Button>
+        </DockPanel>
+        <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding Source={StaticResource UserViewSource}}" 
+                             Margin="13,13,13,13" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                            Header="User Id" Width="SizeToHeader"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UserName}"
+                            Header="Username" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CustomerName}"
+                            Header="Customer Name" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CustomerType}"
+                            Header="Type" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding IsDeleted}"
+                            Header="Deleted" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CreatedAt}"
+                            Header="Created at" Width="*"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UpdatedAt}"
+                            Header="Updated at" Width="*"
+                            IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu Background="#F5F5F5">
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Delete" Click="BtnDelete_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button
+                    Click="BtnPre_Click"
+                    Margin="10,10,10,10"
+                    Style="{StaticResource MaterialDesignPaperLightButton}"
+                    Width="100"
+                    ToolTip="Resource name: MaterialDesignPaperLightButton"
+                    Content="PREV"
+            />
+            <TextBlock Margin="10,20,10,10">1 / 5</TextBlock>
+            <Button
+                  Click="BtnNext_Click"
+                  Margin="10,10,10,10"
+                  Style="{StaticResource MaterialDesignPaperLightButton}"
+                  Width="100"
+                  ToolTip="Resource name: MaterialDesignPaperLightButton"
+                  Content="Next"
+            />
+        </DockPanel>
+    </DockPanel>
 </Page>
