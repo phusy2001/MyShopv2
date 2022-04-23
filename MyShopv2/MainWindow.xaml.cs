@@ -24,10 +24,14 @@ namespace MyShopv2
         public MainWindow()
         {
             InitializeComponent();
+
         }
+
+
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
+
             this.Close();
         }
 
