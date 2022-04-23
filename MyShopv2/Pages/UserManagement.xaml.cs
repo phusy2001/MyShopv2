@@ -3,6 +3,7 @@ using MyShop.Data;
 using MyShop.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -140,6 +141,8 @@ namespace MyShopv2.Pages
                 },
             };
 
+        int _curPage = 0;
+
         public UserManagement()
         {
             InitializeComponent();
@@ -154,13 +157,12 @@ namespace MyShopv2.Pages
 
             // load the entities into EF Core
             _context.Products.Load();
-
-           var users =  from user in userList
+            var users =  from user in userList
                         where user.IsAdmin == false
                         select user;
             // bind to the source
-            UserViewSource.Source = users;
-            
+
+            UserViewSource.Source = users.Skip(_curPage*5).Take(5);
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
@@ -184,9 +186,10 @@ namespace MyShopv2.Pages
 
         private void BtnReload_Click(object sender, RoutedEventArgs e)
         {
-            UserViewSource.Source = from user in userList
+            var users = from user in userList
                                     where user.IsAdmin == false
                                     select user;
+            UserViewSource.Source = users.Skip(_curPage * 5).Take(5);
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -198,7 +201,13 @@ namespace MyShopv2.Pages
             {
                 return;
             }
-            UserViewSource.Source = totalUser.Skip(1 * 5).Take(5).ToList();
+
+            if (_curPage < 1)
+            {
+                _curPage++;
+                UserViewSource.Source = totalUser.Skip(_curPage * 5).Take(5).ToList();
+            }
+
         }
 
         private void BtnPre_Click(object sender, RoutedEventArgs e)
@@ -212,7 +221,11 @@ namespace MyShopv2.Pages
                 return;
             }
 
-            UserViewSource.Source = totalUser.Skip(0 * 5).Take(5).ToList();
+            if (_curPage > 0)
+            {
+                _curPage--;
+                UserViewSource.Source = totalUser.Skip(_curPage * 5).Take(5).ToList();
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
