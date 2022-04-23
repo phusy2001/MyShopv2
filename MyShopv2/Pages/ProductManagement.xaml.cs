@@ -44,6 +44,12 @@ namespace MyShopv2.Pages
 
             // load the entities into EF Core
             _context.Products.Load();
+
+            List<int> NumOfProductPerpage = new List<int>() { 3, 5, 10 };
+            NumOfProductsPerPageCombobox.ItemsSource = NumOfProductPerpage;
+
+            List<string> PriceRangeList = new List<string>() { "0 - 5tr", "5tr - 10tr", "10tr - 30tr", "> 30tr"};
+            PriceRangeCombobox.ItemsSource = PriceRangeList;
         }
 
         private void Category_CbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -213,14 +219,72 @@ namespace MyShopv2.Pages
             _currentPage = 1;
             _totalItems = products.Count;
             _totalPages = _totalItems / _rowsPerPage + (_totalItems % _rowsPerPage == 0 ? 0 : 1);
-            List<int> NumOfProductPerpage = new List<int>() { 3, 5, 10 };
-            NumOfProductsPerPageCombobox.ItemsSource = NumOfProductPerpage;
             PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
 
-            SelectedProducts = products.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
 
             // bind to the source
             ProductViewSource.Source = SelectedProducts;
+        }
+
+        private void OutOfStock_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ProductsListToView.Clear();
+            foreach (var product in products)
+            {
+                if(product.Quantity < 5)
+                {
+                    ProductsListToView.Add(product);
+                }
+            }
+            update_productToShowOnScreen();
+        }
+
+        private void PriceRangeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ProductsListToView.Clear();
+            string range = PriceRangeCombobox.SelectedItem.ToString();
+            if (range.Equals("0 - 5tr"))
+            {
+                foreach( var product in products)
+                {
+                    if( product.Price <= 5000000)
+                    {
+                        ProductsListToView.Add(product);
+                    }
+                }
+            }
+            else if(range.Equals("5tr - 10tr"))
+            {
+                foreach (var product in products)
+                {
+                    if (product.Price > 5000000 && product.Price <= 10000000)
+                    {
+                        ProductsListToView.Add(product);
+                    }
+                }
+            }
+            else if(range.Equals("10tr - 30tr"))
+            {
+                foreach (var product in products)
+                {
+                    if (product.Price > 10000000 && product.Price <= 30000000)
+                    {
+                        ProductsListToView.Add(product);
+                    }
+                }
+            }
+            else if(range.Equals(" > 30tr"))
+            {
+                foreach (var product in products)
+                {
+                    if (product.Price > 30000000)
+                    {
+                        ProductsListToView.Add(product);
+                    }
+                }
+            }
+            update_productToShowOnScreen();
         }
     }
 }

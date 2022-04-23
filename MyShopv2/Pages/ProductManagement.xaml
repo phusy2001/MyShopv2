@@ -14,7 +14,7 @@
         <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
                             EnableRowVirtualization="True" 
                             ItemsSource="{Binding Source={StaticResource ProductViewSource}}" 
-                             Margin="4,46,0,-46" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+                             Margin="4,43,0,356" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}"
                             Header="Product Id" Width="SizeToHeader"
@@ -42,7 +42,7 @@
                             IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="287,274,0,0">
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,507,0,0">
             <Button
                     Name="PrevProduct_pagesBtn"
                     Click="PrevProduct_pagesBtn_Click"
@@ -72,8 +72,8 @@
                 </Button.RenderTransform>
             </Button>
         </DockPanel>
-        <ComboBox Name ="Category_CbBox" SelectionChanged="Category_CbBox_SelectionChanged" HorizontalAlignment="Left" Margin="84,637,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="11,637,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <ComboBox Name ="Category_CbBox" SelectionChanged="Category_CbBox_SelectionChanged" HorizontalAlignment="Left" Margin="103,589,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="31,588,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -84,10 +84,13 @@
             </Label.RenderTransform>
         </Label>
 
-        <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="308,349,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Rows per page:" HorizontalAlignment="Left" Margin="128,345,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="280,11,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Rows per page:" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top"/>
         <Button Name ="SearchProduct_btn" Click="SearchProduct_btn_Click" Content="Search" HorizontalAlignment="Left" Margin="699,9,0,0" VerticalAlignment="Top"/>
         <TextBox Name="SearchProd_TextBox" HorizontalAlignment="Left" Margin="574,13,0,0" TextWrapping="Wrap" Text="Search product" VerticalAlignment="Top" Width="120"/>
-        <Button Name="ImportExcel_btn" Click="ImportExcel_btn_Click" Content="Import Excel" HorizontalAlignment="Left" Margin="29,6,0,0" VerticalAlignment="Top"/>
+        <Button Name="ImportExcel_btn" Click="ImportExcel_btn_Click" Content="Import Excel" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top"/>
+        <Button Name="OutOfStock_btn" Content="View nearly out of stock product" Click="OutOfStock_btn_Click" HorizontalAlignment="Left" Margin="546,573,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name ="PriceRangeCombobox" SelectionChanged="PriceRangeCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="163,627,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Range of price:" HorizontalAlignment="Left" Margin="24,627,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
