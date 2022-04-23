@@ -15,7 +15,10 @@ namespace MyShop.Models
         public string Name { get; set; }
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
-
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

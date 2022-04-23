@@ -42,5 +42,37 @@
                             IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,505,0,0">
+            <Button
+                    Name="PrevProduct_pagesBtn"
+                    Click="PrevProduct_pagesBtn_Click"
+                    Margin="10,10,10,10"
+                    Style="{StaticResource MaterialDesignPaperLightButton}"
+                    Width="100"
+                    ToolTip="Resource name: MaterialDesignPaperLightButton"
+                    Content="Prev"
+            />
+            <TextBlock Margin="10,20,10,10">1 / 5</TextBlock>
+            <Button
+                  Name="NextProduct_pagesBtn"
+                  Click="NextProduct_pagesBtn_Click"
+                  Margin="10,10,10,10"
+                  Style="{StaticResource MaterialDesignPaperLightButton}"
+                  Width="100"
+                  ToolTip="Resource name: MaterialDesignPaperLightButton"
+                  Content="Next" RenderTransformOrigin="0.5,0.5"
+            >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.178"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </DockPanel>
+        <ComboBox Name ="Category_CbBox" SelectionChanged="Category_CbBox_SelectionChanged" HorizontalAlignment="Left" Margin="427,480,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="329,481,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

@@ -26,6 +26,11 @@ namespace MyShop.Models
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
+
 
         public virtual ICollection<Discount> Discounts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
