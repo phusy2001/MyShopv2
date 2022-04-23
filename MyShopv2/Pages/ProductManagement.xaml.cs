@@ -38,6 +38,85 @@ namespace MyShopv2.Pages
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // this is for demo purposes only, to make it easier
+            // to get up and running
+            _context.Database.EnsureCreated();
+
+            // load the entities into EF Core
+            _context.Products.Load();
+        }
+
+        private void Category_CbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int catID = 0;
+            string cat = Category_CbBox.SelectedItem.ToString();
+            foreach (var c in categories)
+            {
+                if (c.Name == cat)
+                {
+                    catID = c.Id;
+                }
+            }
+
+            ProductsListToView.Clear();
+
+            foreach(var c in products)
+            {
+                if(c.CategoryID == catID)
+                {
+                    ProductsListToView.Add(c);
+                }
+            }
+
+            update_productToShowOnScreen();
+        }
+
+        private void PrevProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+                ProductViewSource.Source = SelectedProducts;
+            }
+        }
+
+        private void NextProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage++;
+            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+            ProductViewSource.Source = SelectedProducts;
+        }
+
+        private void NumOfProductsPerPageCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _rowsPerPage = (int)NumOfProductsPerPageCombobox.SelectedItem;
+            update_productToShowOnScreen();
+        }
+
+        public void update_productToShowOnScreen()
+        {
+            _totalItems = ProductsListToView.Count;
+            _totalPages = _totalItems / _rowsPerPage + (_totalItems % _rowsPerPage == 0 ? 0 : 1);
+            _currentPage = 1;
+            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+            ProductViewSource.Source = SelectedProducts;
+        }
+
+        private void SearchProduct_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var prodname = SearchProd_TextBox.Text.Trim().ToLower();
+            SearchProd_TextBox.Text = "Search product name";
+            ProductViewSource.Source = from product in products
+                                       where product.Name.ToLower() == prodname.ToLower()
+                                       select product;
+        }
+
+        private void ImportExcel_btn_Click(object sender, RoutedEventArgs e)
+        {
             var screen = new OpenFileDialog();
             if (screen.ShowDialog() == true)
             {
@@ -127,7 +206,7 @@ namespace MyShopv2.Pages
             // load the entities into EF Core
             _context.Products.Load();
 
-            foreach(var C in products)
+            foreach (var C in products)
             {
                 ProductsListToView.Add(C);
             }
@@ -141,66 +220,6 @@ namespace MyShopv2.Pages
             SelectedProducts = products.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
 
             // bind to the source
-            ProductViewSource.Source = SelectedProducts;
-        }
-
-        private void Category_CbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int catID = 0;
-            string cat = Category_CbBox.SelectedItem.ToString();
-            foreach (var c in categories)
-            {
-                if (c.Name == cat)
-                {
-                    catID = c.Id;
-                }
-            }
-
-            ProductsListToView.Clear();
-
-            foreach(var c in products)
-            {
-                if(c.CategoryID == catID)
-                {
-                    ProductsListToView.Add(c);
-                }
-            }
-
-            update_productToShowOnScreen();
-        }
-
-        private void PrevProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (_currentPage > 1)
-            {
-                _currentPage--;
-                PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
-                SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
-                ProductViewSource.Source = SelectedProducts;
-            }
-        }
-
-        private void NextProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
-        {
-            _currentPage++;
-            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
-            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
-            ProductViewSource.Source = SelectedProducts;
-        }
-
-        private void NumOfProductsPerPageCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _rowsPerPage = (int)NumOfProductsPerPageCombobox.SelectedItem;
-            update_productToShowOnScreen();
-        }
-
-        public void update_productToShowOnScreen()
-        {
-            _totalItems = ProductsListToView.Count;
-            _totalPages = _totalItems / _rowsPerPage + (_totalItems % _rowsPerPage == 0 ? 0 : 1);
-            _currentPage = 1;
-            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
-            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
             ProductViewSource.Source = SelectedProducts;
         }
     }

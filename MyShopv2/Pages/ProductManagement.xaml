@@ -14,7 +14,7 @@
         <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
                             EnableRowVirtualization="True" 
                             ItemsSource="{Binding Source={StaticResource ProductViewSource}}" 
-                             Margin="4,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+                             Margin="4,46,0,-46" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}"
                             Header="Product Id" Width="SizeToHeader"
@@ -85,6 +85,9 @@
         </Label>
 
         <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="308,349,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Num of product per page:" HorizontalAlignment="Left" Margin="128,345,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rows per page:" HorizontalAlignment="Left" Margin="128,345,0,0" VerticalAlignment="Top"/>
+        <Button Name ="SearchProduct_btn" Click="SearchProduct_btn_Click" Content="Search" HorizontalAlignment="Left" Margin="699,9,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="SearchProd_TextBox" HorizontalAlignment="Left" Margin="574,13,0,0" TextWrapping="Wrap" Text="Search product" VerticalAlignment="Top" Width="120"/>
+        <Button Name="ImportExcel_btn" Click="ImportExcel_btn_Click" Content="Import Excel" HorizontalAlignment="Left" Margin="29,6,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
