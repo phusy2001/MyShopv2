@@ -1,14 +1,74 @@
-﻿<Page x:Class="MyShopv2.Pages.Dashboard"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyShopv2.Pages"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="MyShopv2.Pages.Dashboard"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Dashboard">
-
+      Title="Dashboard" Width="1085" Height="582">
     <Grid>
-        <TextBlock>Dashboard</TextBlock>
+        <materialDesign:Card Content="Top 5 SP" HorizontalAlignment="Left" Height="191" VerticalAlignment="Top" Width="432" Margin="4,7,0,0" RenderTransformOrigin="0.5,0.5">
+            <materialDesign:Card.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2598C8" Offset="1"/>
+                    <GradientStop Color="#FF10DABA" Offset="0"/>
+                    <GradientStop Color="#FF0B9982" Offset="0.703"/>
+                </LinearGradientBrush>
+            </materialDesign:Card.Background>
+            <materialDesign:Card.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.474"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:Card.RenderTransform>
+        </materialDesign:Card>
+        <materialDesign:Card Content="SP Ban" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="320" Margin="468,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <materialDesign:Card.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC34040" Offset="0.912"/>
+                    <GradientStop Color="White" Offset="0"/>
+                </LinearGradientBrush>
+            </materialDesign:Card.Background>
+            <materialDesign:Card.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.881"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.485"/>
+                </TransformGroup>
+            </materialDesign:Card.RenderTransform>
+        </materialDesign:Card>
+        <materialDesign:Card Content="Don Hang" HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="321" Margin="468,123,0,0">
+            <materialDesign:Card.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FFE4C1C1" Offset="0"/>
+                    <GradientStop Color="#FFD01212" Offset="0.992"/>
+                </LinearGradientBrush>
+            </materialDesign:Card.Background>
+        </materialDesign:Card>
+        <!--Live Chart-->
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="371,224,111,38">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Truc tung"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Truc hoanh" ></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+        <lvc:CartesianChart Series="{Binding SeriesCollections}"  Margin="0,224,529,0">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Truc tung" LabelFormatter="{Binding LabelFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Truc hoanh" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+
+        </lvc:CartesianChart>
     </Grid>
 </Page>
