@@ -53,7 +53,7 @@
         <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
                             EnableRowVirtualization="True" 
                             ItemsSource="{Binding Source={StaticResource UserViewSource}}" 
-                             Margin="13,13,13,13" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+                             Margin="13,13,13,13" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top" SelectionChanged="ProductListView_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}"
                             Header="User Id" Width="SizeToHeader"

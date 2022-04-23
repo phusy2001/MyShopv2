@@ -21,7 +21,14 @@ namespace MyShopv2.Pages
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         private CollectionViewSource ProductViewSource;
         List<Category> categories = new List<Category>();
-        BindingList<Product> products = new BindingList<Product>();
+        List<Product> products = new List<Product>();
+        List<Product> ProductsListToView = new List<Product> { };
+        List<Product> SelectedProducts = new List<Product> { };
+
+        int _totalItems = 0;
+        int _currentPage = 0;
+        int _totalPages = 0;
+        int _rowsPerPage = 5;
 
         public ProductManagement()
         {
@@ -120,9 +127,21 @@ namespace MyShopv2.Pages
             // load the entities into EF Core
             _context.Products.Load();
 
+            foreach(var C in products)
+            {
+                ProductsListToView.Add(C);
+            }
+            _currentPage = 1;
+            _totalItems = products.Count;
+            _totalPages = _totalItems / _rowsPerPage + (_totalItems % _rowsPerPage == 0 ? 0 : 1);
+            List<int> NumOfProductPerpage = new List<int>() { 3, 5, 10 };
+            NumOfProductsPerPageCombobox.ItemsSource = NumOfProductPerpage;
+            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+
+            SelectedProducts = products.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+
             // bind to the source
-            ProductViewSource.Source = from product in products
-                                       select product;
+            ProductViewSource.Source = SelectedProducts;
         }
 
         private void Category_CbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -136,19 +155,53 @@ namespace MyShopv2.Pages
                     catID = c.Id;
                 }
             }
-            ProductViewSource.Source = from product in products
-                                       where product.CategoryID == catID
-                                       select product;
+
+            ProductsListToView.Clear();
+
+            foreach(var c in products)
+            {
+                if(c.CategoryID == catID)
+                {
+                    ProductsListToView.Add(c);
+                }
+            }
+
+            update_productToShowOnScreen();
         }
 
         private void PrevProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+                ProductViewSource.Source = SelectedProducts;
+            }
         }
 
         private void NextProduct_pagesBtn_Click(object sender, RoutedEventArgs e)
         {
+            _currentPage++;
+            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+            ProductViewSource.Source = SelectedProducts;
+        }
 
+        private void NumOfProductsPerPageCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _rowsPerPage = (int)NumOfProductsPerPageCombobox.SelectedItem;
+            update_productToShowOnScreen();
+        }
+
+        public void update_productToShowOnScreen()
+        {
+            _totalItems = ProductsListToView.Count;
+            _totalPages = _totalItems / _rowsPerPage + (_totalItems % _rowsPerPage == 0 ? 0 : 1);
+            _currentPage = 1;
+            PagesTextBlock.Text = $"{_currentPage}/{_totalPages}";
+            SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
+            ProductViewSource.Source = SelectedProducts;
         }
     }
 }
