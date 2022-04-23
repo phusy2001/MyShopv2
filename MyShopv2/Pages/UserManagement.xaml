@@ -93,7 +93,6 @@
                     ToolTip="Resource name: MaterialDesignPaperLightButton"
                     Content="PREV"
             />
-            <TextBlock Margin="10,20,10,10">1 / 5</TextBlock>
             <Button
                   Click="BtnNext_Click"
                   Margin="10,10,10,10"
