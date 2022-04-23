@@ -49,8 +49,8 @@ namespace MyShopv2.Pages
                 Name = discountName.Text,
                 CouponCode = discountCode.Text,
                 DiscountPercentage = float.Parse( discountPercent.Text),
-                StartDate = "23/04/2022",
-                EndDate = "30/04/2022",
+                StartDate = startdDay.Text,
+                EndDate = endDay.Text,
                 LimitationTimes = Int32.Parse(limitation.Text),
                 MaximumDiscountedQuantity = Int32.Parse(quantity.Text),
             };

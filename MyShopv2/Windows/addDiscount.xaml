@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyShopv2.Pages"
         mc:Ignorable="d"
-        Title="addDiscount" Height="508" Width="450" Loaded="Window_Loaded">
+        Title="addDiscount" Height="534" Width="448" Loaded="Window_Loaded">
     <Border Margin="10" Padding="10" CornerRadius="10" BorderThickness="1" BorderBrush="LightGray" Background="#039BE5">
         <StackPanel DockPanel.Dock="Right" Background="#039BE5">
             <Label Content="Add Coupon" FontSize="20" Foreground="White" FontWeight="DemiBold"></Label>
@@ -23,7 +23,7 @@
             <TextBox Height="25" Name="limitation"></TextBox>
             <Label Content="MaximumDiscountedQuantity" FontSize="15" Foreground="White" FontWeight="DemiBold"/>
             <TextBox Height="25" Name="quantity"></TextBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="84">
                 <Button Margin="5" Width="90" Name="addDiscountBtn" Click="addDiscountBtn_Click">Add</Button>
                 <Button Margin="5" Width="90" Name="cancelBtn" Click="cancelBtn_Click" >Cancel</Button>
             </StackPanel>
