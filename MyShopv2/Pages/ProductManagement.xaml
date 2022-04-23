@@ -17,10 +17,10 @@
                              Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}"
-                            Header="User Id" Width="SizeToHeader"
+                            Header="Product Id" Width="SizeToHeader"
                             IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Name}"
-                            Header="Product name" Width="*"
+                            Header="Product Name" Width="*"
                             IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Description}"
                             Header="Description" Width="*"
