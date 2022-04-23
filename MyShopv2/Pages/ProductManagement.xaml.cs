@@ -203,5 +203,14 @@ namespace MyShopv2.Pages
             SelectedProducts = ProductsListToView.Skip((_currentPage - 1) * _rowsPerPage).Take(_rowsPerPage).ToList();
             ProductViewSource.Source = SelectedProducts;
         }
+
+        private void SearchProduct_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var prodname = SearchProd_TextBox.Text.Trim().ToLower();
+            SearchProd_TextBox.Text = "Search product name";
+            ProductViewSource.Source = from product in products
+                                       where product.Name.ToLower() == prodname.ToLower()
+                                       select product;
+        }
     }
 }
