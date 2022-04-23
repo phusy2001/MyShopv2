@@ -14,7 +14,7 @@
         <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
                             EnableRowVirtualization="True" 
                             ItemsSource="{Binding Source={StaticResource ProductViewSource}}" 
-                             Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+                             Margin="4,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}"
                             Header="Product Id" Width="SizeToHeader"
@@ -42,7 +42,7 @@
                             IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,505,0,0">
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="287,274,0,0">
             <Button
                     Name="PrevProduct_pagesBtn"
                     Click="PrevProduct_pagesBtn_Click"
@@ -52,7 +52,7 @@
                     ToolTip="Resource name: MaterialDesignPaperLightButton"
                     Content="Prev"
             />
-            <TextBlock Margin="10,20,10,10">1 / 5</TextBlock>
+            <TextBlock Name="PagesTextBlock" Margin="10,20,10,10">1 / 5</TextBlock>
             <Button
                   Name="NextProduct_pagesBtn"
                   Click="NextProduct_pagesBtn_Click"
@@ -72,7 +72,19 @@
                 </Button.RenderTransform>
             </Button>
         </DockPanel>
-        <ComboBox Name ="Category_CbBox" SelectionChanged="Category_CbBox_SelectionChanged" HorizontalAlignment="Left" Margin="427,480,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="329,481,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name ="Category_CbBox" SelectionChanged="Category_CbBox_SelectionChanged" HorizontalAlignment="Left" Margin="84,637,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="11,637,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.85"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="308,349,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Num of product per page:" HorizontalAlignment="Left" Margin="128,345,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
