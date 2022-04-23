@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MyShop.Data;
+using MyShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,36 @@ namespace MyShopv2.Pages
     /// </summary>
     public partial class OrderManagement : Page
     {
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private CollectionViewSource OrderViewSource;
         public OrderManagement()
         {
             InitializeComponent();
+            OrderViewSource = (CollectionViewSource)FindResource(nameof(OrderViewSource));
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // this is for demo purposes only, to make it easier
+            // to get up and running
+            _context.Database.EnsureCreated();
+
+            // load the entities into EF Core
+            _context.Orders.Load();
+
+            // bind to the source
+            OrderViewSource.Source = _context.Orders.Local.ToObservableCollection();
+        }
+
+        private void addOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var addOrderWindow = new addOrder();
+            addOrderWindow.ShowDialog();
+            var ketqua = from order in _context.Orders
+                         where order.UserID == 1
+                         select order;
+            foreach (var order in ketqua)
+                Console.WriteLine(order.ToString());
         }
     }
 }

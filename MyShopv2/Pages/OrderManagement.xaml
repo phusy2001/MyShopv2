@@ -6,9 +6,56 @@
       xmlns:local="clr-namespace:MyShopv2.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OrderManagement">
-
-    <Grid>
-        <TextBlock>Order</TextBlock>
-    </Grid>
+      Title="OrderManagement" Loaded="Window_Loaded">
+    <Page.Resources>
+        <CollectionViewSource x:Key="OrderViewSource"/>
+    </Page.Resources>
+    <StackPanel>
+     
+        <Grid>
+            <DataGrid x:Name="ProductListView" AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding Source={StaticResource OrderViewSource}}" 
+                             Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected" DockPanel.Dock="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}"
+                            Header="Order Id" Width="SizeToHeader"
+                            IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Status}"
+                            Header="Status" Width="*"
+                            IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UserID}"
+                            Header="User" Width="*"
+                            IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding ShippingAddressID}"
+                            Header="Address" Width="*"
+                            IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding CreatedAt}"
+                            Header="Created at" Width="*"
+                            IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding UpdatedAt}"
+                            Header="Updated at" Width="*"
+                            IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Name="addOrderBtn" 
+  Style="{StaticResource MaterialDesignFlatMidBgButton}"
+  ToolTip="MaterialDesignFlatMidButton"
+  Content="Add Order"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="addOrderBtn_Click"/>
+            
+            <Button Grid.Row="1"
+  Style="{StaticResource MaterialDesignFlatMidBgButton}"
+  ToolTip="MaterialDesignFlatMidButton"
+  Content="Edit Order"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+        </Grid>
+        
+    </StackPanel>
 </Page>

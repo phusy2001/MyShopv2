@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MyShop.Data;
+using MyShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,24 @@ namespace MyShopv2.Pages
     /// </summary>
     public partial class CouponManagement : Page
     {
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private CollectionViewSource DiscountViewSource;
         public CouponManagement()
         {
             InitializeComponent();
+            DiscountViewSource = (CollectionViewSource)FindResource(nameof(DiscountViewSource));
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // this is for demo purposes only, to make it easier
+            // to get up and running
+            _context.Database.EnsureCreated();
+
+            // load the entities into EF Core
+            _context.Discounts.Load();
+
+            // bind to the source
+            DiscountViewSource.Source = _context.Discounts.Local.ToObservableCollection();
         }
     }
 }

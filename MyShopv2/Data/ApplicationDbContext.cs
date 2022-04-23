@@ -10,10 +10,11 @@ namespace MyShop.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public object Coupons { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           optionsBuilder.UseSqlServer("Server=DESKTOP-EQA7TFT\\SYNGUYEN;Database=MyShop;Trusted_Connection=True;MultipleActiveResultSets=true");
+           optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=MyShop;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }

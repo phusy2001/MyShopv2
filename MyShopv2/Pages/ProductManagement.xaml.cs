@@ -29,7 +29,7 @@ namespace MyShopv2.Pages
                 new Product()
                 {
                     Id = 1,
-                    Name = "San pham thu 1",
+                    Name = "Iphone 7",
                     Description = "Mo ta san pham",
                     Price = 2000000,
                     imageURL = "No image",
