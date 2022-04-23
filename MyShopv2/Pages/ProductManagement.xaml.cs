@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Aspose.Cells;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using MyShop.Data;
 using MyShop.Models;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,21 +28,89 @@ namespace MyShopv2.Pages
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var products = new List<Product>()
+            List<Category> categories = new List<Category>();
+            BindingList<Product> products = new BindingList<Product>();
+            var screen = new OpenFileDialog();
+            if (screen.ShowDialog () == true)
             {
-                new Product()
+                string filename = screen.FileName;
+                Debug.WriteLine(filename);
+                var workbook = new Workbook(filename);
+                var tabs = workbook.Worksheets;
+
+                foreach (var tab in tabs)
                 {
-                    Id = 1,
-                    Name = "San pham thu 1",
-                    Description = "Mo ta san pham",
-                    Price = 2000000,
-                    imageURL = "No image",
-                    Quantity = 5,
-                    CategoryID = 1,
-                    CreatedAt = "22/04/2022",
-                    UpdatedAt = "22/04/2022"
+                    var column = 'B';
+                    var row = 4;
+                    if (tab.Name.Equals("Product"))
+                    {
+                        _context.Products.Load();
+                        var cell = tab.Cells[$"{column}{row}"];
+
+                        while (cell.Value != null)
+                        {
+                            int id = tab.Cells[$"{ column}{row}"].IntValue;
+                            string name = tab.Cells[$"C{row}"].StringValue;
+                            string description = tab.Cells[$"D{row}"].StringValue;
+                            int price = tab.Cells[$"E{row}"].IntValue;
+                            string imageURL = tab.Cells[$"F{row}"].StringValue;
+                            int quantity = tab.Cells[$"G{row}"].IntValue;
+                            int categoryId = tab.Cells[$"H{row}"].IntValue;
+                            string createdAt = tab.Cells[$"I{row}"].StringValue;
+                            string updateAt = tab.Cells[$"J{row}"].StringValue;
+
+                            var p = new Product()
+                            {
+                                Id = id,
+                                Name = name,
+                                Description = description,
+                                Price = price,
+                                imageURL = imageURL,
+                                Quantity = quantity,
+                                CategoryID = categoryId,
+                                CreatedAt = createdAt,
+                                UpdatedAt = updateAt,
+                            };
+
+                            products.Add(p);
+                            //_context.Products.Add(p);
+                            //_context.SaveChanges();
+                            row++;
+                            cell = tab.Cells[$"{column}{row}"];
+                        }
+
+                    }
+                    else if (tab.Name.Equals("Category"))
+                    {
+                        var cell = tab.Cells[$"{column}{row}"];
+                        _context.Categories.Load();
+
+                        while (cell.Value != null)
+                        {
+                            int id = tab.Cells[$"{ column}{row}"].IntValue;
+                            string name = tab.Cells[$"C{row}"].StringValue;
+                            string createdAt = tab.Cells[$"D{row}"].StringValue;
+                            string updateAt = tab.Cells[$"E{row}"].StringValue;
+
+                            var p = new Category()
+                            {
+                                Id = id,
+                                Name = name,
+                                CreatedAt = createdAt,
+                                UpdatedAt = updateAt,
+                            };
+
+                            categories.Add(p);
+                            //_context.Categories.Add(p);
+                            //_context.SaveChanges();
+                            row++;
+                            cell = tab.Cells[$"{column}{row}"];
+                        }
+                    }
                 }
-            };
+            }
+
+
             // this is for demo purposes only, to make it easier
             // to get up and running
             _context.Database.EnsureCreated();
@@ -47,7 +119,7 @@ namespace MyShopv2.Pages
             _context.Products.Load();
 
             // bind to the source
-            ProductViewSource.Source = _context.Products.Local.ToObservableCollection();
+            ProductViewSource.Source = products;
         }
 
     }
