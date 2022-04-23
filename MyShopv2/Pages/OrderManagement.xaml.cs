@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Data;
 using MyShop.Models;
+using MyShopv2.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace MyShopv2.Pages
             _context.Orders.Load();
 
             // bind to the source
-            OrderViewSource.Source = _context.Orders.Local.ToObservableCollection();
+            OrderViewSource.Source = _context.Orders.Local.ToObservableCollection().Skip(0 * 5).Take(5);
         }
 
         private void addOrderBtn_Click(object sender, RoutedEventArgs e)
@@ -86,23 +87,14 @@ namespace MyShopv2.Pages
                     MessageBox.Show(ex.ToString());
                 }
             }
-
-            var ketqua = from order in _context.Orders
-                         where order.UserID == 1
-                         select order;
-            foreach (var order in ketqua)
-                Console.WriteLine(order.ToString());
         }
 
         private void editMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = OrderListView.SelectedItem as Order;
-
-            var ketqua = from order in _context.Orders
-                         where order.UserID == 1
-                         select order;
-            foreach (var order in ketqua)
-                Console.WriteLine(order.ToString());
+            var editWindow = new EditOrder( selectedItem.Id , selectedItem.UserID, selectedItem.Status, selectedItem.ShippingAddressID);
+            editWindow.ShowDialog();
+            OrderListView.Items.Refresh();
         }
 
         private void orderDetail_Click(object sender, RoutedEventArgs e)
@@ -114,7 +106,11 @@ namespace MyShopv2.Pages
 
         private void filterByDayBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+            var start = startDay.SelectedDate;
+            var end = endDay.SelectedDate;  
+            var orders = from order in _context.Orders.Local.ToObservableCollection()
+                         select order;
+            OrderViewSource.Source = orders.Skip(0 * 5).Take(5).ToList();
         }
 
         int _curPage = 0;
@@ -128,9 +124,9 @@ namespace MyShopv2.Pages
                 return;
             }
 
-            if (_curPage < 1)
+            if (_curPage > 0)
             {
-                _curPage++;
+                _curPage--;
                 OrderViewSource.Source = totalOrder.Skip(_curPage * 5).Take(5).ToList();
             }
 
@@ -138,7 +134,20 @@ namespace MyShopv2.Pages
 
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
+            var totalOrder = from order in _context.Orders.Local.ToObservableCollection()
+                            select order;
+            if (totalOrder.Count() == 0)
+            {
+                return;
+            }
 
+            if (_curPage < 1)
+            {
+                _curPage++;
+                OrderViewSource.Source = totalOrder.Skip(_curPage * 5).Take(5).ToList();
+            }
         }
+
+        
     }
 }

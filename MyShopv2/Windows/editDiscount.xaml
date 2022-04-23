@@ -1,0 +1,32 @@
+﻿<Window x:Class="MyShopv2.Windows.editDiscount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShopv2.Windows"
+        mc:Ignorable="d"
+        Title="editDiscount" Height="540" Width="400">
+    <Border Margin="10" Padding="10" CornerRadius="10" BorderThickness="1" BorderBrush="LightGray" Background="#039BE5">
+        <StackPanel DockPanel.Dock="Right" Background="#039BE5">
+            <Label Content="Edit Coupon" FontSize="20" Foreground="White" FontWeight="DemiBold"></Label>
+            <Label Content="Coupon name" FontSize="15" Foreground="White" FontWeight="DemiBold"></Label>
+            <TextBox Height="25" Name="discountName"></TextBox>
+            <Label Content="Coupon code" FontSize="15" Foreground="White" FontWeight="DemiBold"></Label>
+            <TextBox Height="25" Name="discountCode" ></TextBox>
+            <Label Content="DiscountPercentage" FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="discountPercent"></TextBox>
+            <Label Content="StartDate ( yy-mm-dd) " FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="startdDay"></TextBox>
+            <Label Content="EndDate ( yy-mm-dd) " FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="endDay"></TextBox>
+            <Label Content="LimitationTimes " FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="limitation"></TextBox>
+            <Label Content="MaximumDiscountedQuantity" FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="maxQuantity"></TextBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="84">
+                <Button Margin="5" Width="90" Name="editDiscountBtn" Click="editDiscountBtn_Click">Add</Button>
+                <Button Margin="5" Width="90" Name="cancelBtn" Click="cancelBtn_Click" >Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

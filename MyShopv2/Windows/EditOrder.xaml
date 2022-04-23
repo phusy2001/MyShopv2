@@ -1,15 +1,14 @@
-﻿<Window x:Class="MyShopv2.Pages.addOrder"
+﻿<Window x:Class="MyShopv2.Windows.EditOrder"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShopv2.Pages"
+        xmlns:local="clr-namespace:MyShopv2.Windows"
         mc:Ignorable="d"
-        Title="addOrder" Height="450" Width="450" Loaded="Window_Loaded">
-    
+        Title="EditOrder" Height="450" Width="400">
     <Border Margin="10" Padding="10" CornerRadius="10" BorderThickness="1" BorderBrush="LightGray" Background="#039BE5">
         <StackPanel DockPanel.Dock="Right" Background="#039BE5">
-            <Label Content="Add Order" FontSize="20" Foreground="White" FontWeight="DemiBold"></Label>
+            <Label Content="Edit Order" FontSize="20" Foreground="White" FontWeight="DemiBold"></Label>
             <Label Content="Customer ID" FontSize="15" Foreground="White" FontWeight="DemiBold"></Label>
             <TextBox Height="25" Name="userName"></TextBox>
             <Label Content="Status " FontSize="15" Foreground="White" FontWeight="DemiBold"></Label>
@@ -19,10 +18,9 @@
             <Label Content="Product ID" FontSize="15" Foreground="White" FontWeight="DemiBold"/>
             <TextBox Height="25" Name="productID"></TextBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="5" Width="90" Name="addOrderBtn" Click="addOrderBtn_ClickAsync">Add</Button>
+                <Button Margin="5" Width="90" Name="editOrderBtn" Click="editOrderBtn_Click">Edit</Button>
                 <Button Margin="5" Width="90" Name="cancelBtn" Click="cancelBtn_Click" >Cancel</Button>
             </StackPanel>
         </StackPanel>
     </Border>
-
 </Window>

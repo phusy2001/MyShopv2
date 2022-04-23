@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Data;
 using MyShop.Models;
+using MyShopv2.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace MyShopv2.Pages
             _context.Discounts.Load();
 
             // bind to the source
-            DiscountViewSource.Source = _context.Discounts.Local.ToObservableCollection();
+            DiscountViewSource.Source = _context.Discounts.Local.ToObservableCollection().Skip(0 * 5).Take(5).ToList();
         }
 
         private void addDiscountBtn_Click(object sender, RoutedEventArgs e)
@@ -51,26 +52,77 @@ namespace MyShopv2.Pages
         }
         private void editMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var addOrderWindow = new addOrder();
-            addOrderWindow.ShowDialog();
+            var selectedItem = DiscountListView.SelectedItem as Discount;
+            var editCouponWindow = new editDiscount(selectedItem.Name, selectedItem.CouponCode, selectedItem.DiscountPercentage, selectedItem.StartDate, selectedItem.EndDate, selectedItem.LimitationTimes, selectedItem.MaximumDiscountedQuantity);
+            editCouponWindow.ShowDialog();
             DiscountListView.Items.Refresh();
-            var ketqua = from order in _context.Orders
-                         where order.UserID == 1
-                         select order;
-            foreach (var order in ketqua)
-                Console.WriteLine(order.ToString());
+
         }
 
-        private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
+        private async void deleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var addOrderWindow = new addOrder();
-            addOrderWindow.ShowDialog();
-            DiscountListView.Items.Refresh();
-            var ketqua = from order in _context.Orders
-                         where order.UserID == 1
-                         select order;
-            foreach (var order in ketqua)
-                Console.WriteLine(order.ToString());
+            var selectedItem = DiscountListView.SelectedItem as Discount;
+
+            //var book = OrderListView.SelectedCells;
+
+            var result = MessageBox.Show($"Bạn thật sự muốn xóa voucher {selectedItem.Name}?",
+                "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (MessageBoxResult.Yes == result)
+            {
+                try
+                {
+                    var tarDiscount = await _context.Discounts.FindAsync(selectedItem.Id); //Pass id tarUser deleted
+                    if (tarDiscount != null)
+                    {
+                        _context.Discounts.Remove(tarDiscount);
+                        _context.SaveChanges();
+                        DiscountListView.Items.Refresh();
+                    }
+                    else
+                    {
+                        //Show optional alert
+                        MessageBox.Show("");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        int _curPage = 0;
+        private void prevBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var totalDiscount = from Discount in _context.Discounts.Local.ToObservableCollection() select Discount;
+            if (totalDiscount.Count() == 0)
+            {
+                return;
+            }
+
+            if (_curPage > 0)
+            {
+                _curPage--;
+                DiscountViewSource.Source = totalDiscount.Skip(_curPage * 5).Take(5).ToList();
+            }
+
+        }
+
+        private void nextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var totalDiscount = from Discount in _context.Discounts.Local.ToObservableCollection()
+                             select Discount;
+            if (totalDiscount.Count() == 0)
+            {
+                return;
+            }
+
+            if (_curPage < 1)
+            {
+                _curPage++;
+                DiscountViewSource.Source = totalDiscount.Skip(_curPage * 5).Take(5).ToList();
+            }
         }
     }
 }

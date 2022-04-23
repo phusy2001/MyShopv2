@@ -57,7 +57,7 @@ namespace MyShopv2.Pages
             int customerID = Int32.Parse(userName.Text);
             var orderStatus = status.Text;
             int orderAddres = Int32.Parse(address.Text);
-            var createdAt = createdDay.Text;
+            var createdAt = DateTime.Now.ToString();
             var productid = productID.Text;
             //var newProduct = await _context.Products.FindAsync(productid);
             var newOrder = new Order()
@@ -65,8 +65,8 @@ namespace MyShopv2.Pages
                 UserID = customerID,
                 Status = orderStatus,
                 ShippingAddressID = orderAddres,
-                CreatedAt = "23/04/2022",
-                UpdatedAt = "23/04/2022"
+                CreatedAt = createdAt,
+                UpdatedAt = createdAt
             };
 
             try
