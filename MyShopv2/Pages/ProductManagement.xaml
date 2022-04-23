@@ -84,7 +84,7 @@
             </Label.RenderTransform>
         </Label>
 
-        <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="280,11,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="NumOfProductsPerPageCombobox" SelectionChanged="NumOfProductsPerPageCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="267,11,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Rows per page:" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top"/>
         <Button Name ="SearchProduct_btn" Click="SearchProduct_btn_Click" Content="Search" HorizontalAlignment="Left" Margin="699,9,0,0" VerticalAlignment="Top"/>
         <TextBox Name="SearchProd_TextBox" HorizontalAlignment="Left" Margin="574,13,0,0" TextWrapping="Wrap" Text="Search product" VerticalAlignment="Top" Width="120"/>
@@ -92,5 +92,7 @@
         <Button Name="OutOfStock_btn" Content="View nearly out of stock product" Click="OutOfStock_btn_Click" HorizontalAlignment="Left" Margin="546,573,0,0" VerticalAlignment="Top"/>
         <ComboBox Name ="PriceRangeCombobox" SelectionChanged="PriceRangeCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="163,627,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Range of price:" HorizontalAlignment="Left" Margin="24,627,0,0" VerticalAlignment="Top"/>
+        <Button Name ="AddProductBtn" Content="Add Product" HorizontalAlignment="Left" Margin="417,5,0,0" VerticalAlignment="Top" Click="AddProductBtn_Click"/>
+
     </Grid>
 </Page>

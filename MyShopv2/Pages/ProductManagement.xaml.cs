@@ -286,5 +286,59 @@ namespace MyShopv2.Pages
             }
             update_productToShowOnScreen();
         }
+
+        private void AddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Product a = new Product()
+            {
+                Id = 999,
+                Name = "",
+                Description = "",
+                Price = 0,
+                Quantity = 0,
+                CategoryID = 0,
+                CreatedAt = "",
+                UpdatedAt = "",
+            };
+
+            var screen = new editProductWindow(a.Id, a.Name, a.Description, a.Quantity, a.CategoryID,  a.Price);
+            screen.IDChanged += NewID =>
+            {
+                a.Id = NewID;
+            };
+
+            screen.NameChanged += NewName =>
+            {
+                a.Name = NewName;
+            };
+
+            screen.DescriptionChanged += NewDescription =>
+            {
+                a.Description = NewDescription;
+            };
+
+            screen.PriceChanged += NewPrice =>
+            {
+                a.Price = NewPrice;
+            };
+
+            screen.QuantityChanged += NewQuantity =>
+            {
+                a.Quantity = NewQuantity;
+            };
+
+            screen.CategoryIDChanged += NewCategoryID =>
+            {
+                a.CategoryID = NewCategoryID;
+            };
+
+            if (screen.ShowDialog() == true)
+            {
+
+            }
+            else
+            {
+            }
+        }
     }
 }
