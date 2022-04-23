@@ -220,7 +220,7 @@ namespace MyShopv2.Pages
             MessageBox.Show(ProductListView.SelectedItem.ToString());
         }
 
-        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnFilter_Click(object sender, RoutedEventArgs e)
         {
 
         }
