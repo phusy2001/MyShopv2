@@ -18,6 +18,8 @@
             <TextBox Height="25" Name="address"></TextBox>
             <Label Content="Created at ( yy-mm-dd) " FontSize="15" Foreground="White" FontWeight="DemiBold"/>
             <TextBox Height="25" Name="createdDay"></TextBox>
+            <Label Content="Product ID" FontSize="15" Foreground="White" FontWeight="DemiBold"/>
+            <TextBox Height="25" Name="productID"></TextBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Margin="5" Width="90" Name="addOrderBtn" Click="addOrderBtn_ClickAsync">Add</Button>
                 <Button Margin="5" Width="90" Name="cancelBtn" Click="cancelBtn_Click" >Cancel</Button>

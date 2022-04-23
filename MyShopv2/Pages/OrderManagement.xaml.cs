@@ -54,5 +54,67 @@ namespace MyShopv2.Pages
             foreach (var order in ketqua)
                 Console.WriteLine(order.ToString());
         }
+
+        private async void deleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = OrderListView.SelectedItem as Order;
+
+            //var book = OrderListView.SelectedCells;
+
+            var result = MessageBox.Show($"Bạn thật sự muốn xóa đơn hàng {selectedItem.Id}?",
+                "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (MessageBoxResult.Yes == result)
+            {
+                try
+                {
+                    var tarOrder = await _context.Orders.FindAsync(selectedItem.Id); //Pass id tarUser deleted
+                    if (tarOrder != null)
+                    {
+                        _context.Orders.Remove(tarOrder);
+                        _context.SaveChanges();
+                        this.OrderListView.Items.Refresh();
+                    }
+                    else
+                    {
+                        //Show optional alert
+                        MessageBox.Show("");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+            var ketqua = from order in _context.Orders
+                         where order.UserID == 1
+                         select order;
+            foreach (var order in ketqua)
+                Console.WriteLine(order.ToString());
+        }
+
+        private void editMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = OrderListView.SelectedItem as Order;
+
+            var ketqua = from order in _context.Orders
+                         where order.UserID == 1
+                         select order;
+            foreach (var order in ketqua)
+                Console.WriteLine(order.ToString());
+        }
+
+        private void orderDetail_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = OrderListView.SelectedItem as Order;
+            var orderDetail = new OrderDetail(selectedItem.Id, selectedItem.Status, selectedItem.UserID,selectedItem.ShippingAddressID, selectedItem.CreatedAt, selectedItem.UpdatedAt);
+            orderDetail.ShowDialog();
+        }
+
+        private void filterByDayBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

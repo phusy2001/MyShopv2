@@ -46,7 +46,30 @@ namespace MyShopv2.Pages
         private void addDiscountBtn_Click(object sender, RoutedEventArgs e)
         {
             var addCoupon = new addDiscount();
-            addCoupon.ShowDialog();
+            DiscountListView.Items.Refresh();
+        }
+        private void editMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var addOrderWindow = new addOrder();
+            addOrderWindow.ShowDialog();
+            DiscountListView.Items.Refresh();
+            var ketqua = from order in _context.Orders
+                         where order.UserID == 1
+                         select order;
+            foreach (var order in ketqua)
+                Console.WriteLine(order.ToString());
+        }
+
+        private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var addOrderWindow = new addOrder();
+            addOrderWindow.ShowDialog();
+            DiscountListView.Items.Refresh();
+            var ketqua = from order in _context.Orders
+                         where order.UserID == 1
+                         select order;
+            foreach (var order in ketqua)
+                Console.WriteLine(order.ToString());
         }
     }
 }

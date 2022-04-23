@@ -58,9 +58,10 @@ namespace MyShopv2.Pages
             var orderStatus = status.Text;
             int orderAddres = Int32.Parse(address.Text);
             var createdAt = createdDay.Text;
-            var newOrder = new Order() //create newUser with optional data
+            var productid = productID.Text;
+            //var newProduct = await _context.Products.FindAsync(productid);
+            var newOrder = new Order()
             {
-
                 UserID = customerID,
                 Status = orderStatus,
                 ShippingAddressID = orderAddres,
