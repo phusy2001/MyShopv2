@@ -116,5 +116,29 @@ namespace MyShopv2.Pages
         {
            
         }
+
+        int _curPage = 0;
+
+        private void prevBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var totalOrder = from order in _context.Orders.Local.ToObservableCollection()
+                             select order;
+            if (totalOrder.Count() == 0)
+            {
+                return;
+            }
+
+            if (_curPage < 1)
+            {
+                _curPage++;
+                OrderViewSource.Source = totalOrder.Skip(_curPage * 5).Take(5).ToList();
+            }
+
+        }
+
+        private void nextBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

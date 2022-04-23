@@ -46,6 +46,7 @@ namespace MyShopv2.Pages
         private void addDiscountBtn_Click(object sender, RoutedEventArgs e)
         {
             var addCoupon = new addDiscount();
+            addCoupon.ShowDialog();
             DiscountListView.Items.Refresh();
         }
         private void editMenuItem_Click(object sender, RoutedEventArgs e)

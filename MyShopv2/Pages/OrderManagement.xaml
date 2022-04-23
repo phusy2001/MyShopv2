@@ -53,7 +53,7 @@
             </DataGrid>
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20" >
-            <Button Content="Previous" Height="35"></Button>
+            <Button Content="Previous" Height="35" Name="prevBtn" Click="prevBtn_Click"></Button>
             <ComboBox Width="50" Margin="10" Height="35">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -66,7 +66,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Content="Previous" Height="35"></Button>
+            <Button Content="Next" Name="nextBtn" Height="35" Click="nextBtn_Click"></Button>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
